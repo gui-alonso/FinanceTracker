@@ -1,0 +1,36 @@
+## Build results
+bin/
+obj/
+
+## Rider
+.idea/
+
+## Visual Studio
+.vs/
+*.user
+*.suo
+
+## ASP.NET specific
+appsettings.Development.json
+appsettings.*.json
+appsettings.local.json
+
+## Logs
+*.log
+
+## DotNet artifacts
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+## Npm / Node (caso tenha frontend junto)
+node_modules/
+dist/
+
+## Others
+*.db
+*.sqlite
+*.pdb
+*.cache
+*.DS_Store
+Thumbs.db

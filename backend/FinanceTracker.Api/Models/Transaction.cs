@@ -19,6 +19,11 @@ public class Transaction
 
     [Required]
     public string Type { get; set; } = string.Empty; // "income" or "expense"
+    public int UserId { get; set; } // ID do usuário associado ao lançamento
+    
+    [ForeignKey("UserId")]
+    public User? User { get; set; } // Navegação para o usuário associado ao lançamento
+
 
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow; // Data de criação do lançamento.
     public DateTime UpdatedAt { get; set; } = DateTime.UtcNow; // Data da última atualização do lançamento.

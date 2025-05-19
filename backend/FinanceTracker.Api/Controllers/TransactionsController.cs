@@ -1,7 +1,8 @@
 using Microsoft.AspNetCore.Mvc;                          // Fornece os atributos e classes para criar APIs REST
 using Microsoft.EntityFrameworkCore;
 using FinanceTracker.API.Models;
-using FinanceTracker.API.Data;                     // Permite o uso de EF Core (consultas, tracking etc)
+using FinanceTracker.API.Data;
+using FinanceTracker.Api.Dtos;                     // Permite o uso de EF Core (consultas, tracking etc)
 
 namespace FinanceTracker.Api.Controllers
 {
@@ -41,17 +42,31 @@ namespace FinanceTracker.Api.Controllers
             return transaction;
         }
 
+
+
         // POST: api/transactions
         // Cria uma nova transação
         [HttpPost]
-        public async Task<ActionResult<Transaction>> PostTransaction(Transaction transaction)
+        public async Task<ActionResult<Transaction>> PostTransaction(TransactionCreateDto dto)
         {
-            _context.Transactions.Add(transaction);      // Adiciona ao contexto
-            await _context.SaveChangesAsync();           // Salva no banco
+            var transaction = new Transaction
+            {
+                Description = dto.Description,
+                Amount = dto.Amount,
+                Date = dto.Date,
+                Type = dto.Type,
+                UserId = dto.UserId,
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow
+            };
 
-            // Retorna 201 Created com a rota do novo recurso
+            _context.Transactions.Add(transaction);
+            await _context.SaveChangesAsync();
+
             return CreatedAtAction(nameof(GetTransaction), new { id = transaction.Id }, transaction);
         }
+
+
 
         // PUT: api/transactions/{id}
         // Atualiza uma transação existente

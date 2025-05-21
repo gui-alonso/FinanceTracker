@@ -1,12 +1,17 @@
-import './App.css';
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Login from './pages/Login.jsx';
+import Register from './pages/Register.jsx';
 
-function App() {
+export default function App() {
   return (
-    <div className="container">
-      <h1>Seja bem-vindo ao FinanceTracker</h1>
-      <p>Uma aplicação que vai ajudar você a controlar os gastos.</p>
-    </div>
+    <><h2>Bem-vindo ao FinanceTracker</h2>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        {/* outras rotas */}
+      </Routes>
+    </BrowserRouter></>
   );
 }
-
-export default App;
